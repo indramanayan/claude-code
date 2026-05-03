@@ -41,6 +41,39 @@ A lightweight proxy that routes Claude Code's Anthropic API calls to **NVIDIA NI
 | **Subagent Control**       | Task tool interception forces `run_in_background=False`. No runaway subagents                   |
 | **Extensible**             | Clean `BaseProvider` and `MessagingPlatform` ABCs. Add new providers or platforms easily        |
 
+## Workflow Cerdas (Boost Kualitas Berpikir)
+
+Gunakan pola berikut agar hasil coding agent lebih akurat, hemat token, dan minim trial-error:
+
+1. **Tetapkan objective + batasan sejak awal**  
+   Jelaskan *goal*, stack, deadline, batas file, dan kriteria selesai dalam 3-6 poin.
+2. **Paksa mode plan terlebih dahulu**  
+   Minta agent membuat rencana langkah demi langkah sebelum menulis kode.
+3. **Kerjakan iteratif per milestone kecil**  
+   Gunakan siklus: *plan -> implement -> test -> ringkas hasil -> lanjut*.
+4. **Wajibkan evidence setiap perubahan**  
+   Minta output `git diff`, daftar file terdampak, serta alasan teknis singkat per file.
+5. **Aktifkan quality gate otomatis**  
+   Jalankan lint, type-check, dan test pada setiap milestone, bukan hanya di akhir.
+6. **Gunakan prompt debugging terstruktur**  
+   Sertakan: gejala, ekspektasi, reproduksi minimal, log/error, dan hipotesis awal.
+
+Template singkat yang bisa langsung dipakai:
+
+```text
+Context: <fitur/bug yang dikerjakan>
+Goal: <hasil akhir terukur>
+Constraints: <file yang boleh diubah, style, deadline>
+Plan first: buat rencana 5 langkah, tunggu approval
+Execution: implement 1 langkah per iterasi
+Validation: jalankan test/lint tiap iterasi
+Output: ringkas perubahan + risiko + next step
+```
+
+> Rekomendasi: jika tugas besar, pecah jadi beberapa issue kecil lalu jalankan agent per issue agar fokus tetap tinggi.
+
+---
+
 ## Quick Start
 
 ### Prerequisites
